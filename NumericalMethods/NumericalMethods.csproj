@@ -31,7 +31,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\NCalc\Evaluant.Calculator\bin\Debug\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="NCalc">
+      <HintPath>..\..\NCalc\Evaluant.Calculator\bin\Debug\NCalc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,10 +53,14 @@
   <ItemGroup>
     <Compile Include="CentralDifference.cs" />
     <Compile Include="ChangeOfSign.cs" />
+    <Compile Include="ForwardDifference.cs" />
     <Compile Include="Iteration.cs" />
+    <Compile Include="MidpointRule.cs" />
     <Compile Include="NewtonRaphson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpsonsRule.cs" />
+    <Compile Include="TrapeziumRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

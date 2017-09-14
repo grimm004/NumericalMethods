@@ -6,9 +6,14 @@ namespace NumericalMethods
     {
         static void Main(string[] args)
         {
-            int n = 5000;
-            for (double i = -2; i < 2; i++) Console.WriteLine($"n: { n }\tstart: { i }\tNewton Raphson Method: { NewtonRaphson.Calculate(n, i, 0.0001d, F).ToString("0.000000000000000") }");
+            Console.WriteLine($"{ SimpsonsRule.Calculate(1, 2, 4, G) }");
+
             Console.ReadKey();
+        }
+
+        static double G(double x)
+        {
+            return x * x * x;
         }
 
         static double R1(double x)
@@ -24,11 +29,6 @@ namespace NumericalMethods
         static double F(double x)
         {
             return (x * x * x * x * x) - (5 * x) + 3;
-        }
-
-        static double Fp(double x)
-        {
-            return (5 * (x * x * x * x)) - 5;
         }
     }
 }
