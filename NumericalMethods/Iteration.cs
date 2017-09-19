@@ -2,7 +2,7 @@
 
 namespace NumericalMethods
 {
-    class Iteration
+    class RearrangementMethod
     {
         public static double Calculate(int n, double x, Func<double, double> function)
         {

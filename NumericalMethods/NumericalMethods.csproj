@@ -53,12 +53,14 @@
   <ItemGroup>
     <Compile Include="CentralDifference.cs" />
     <Compile Include="ChangeOfSign.cs" />
+    <Compile Include="FalsePosition.cs" />
     <Compile Include="ForwardDifference.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="MidpointRule.cs" />
     <Compile Include="NewtonRaphson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecantMethod.cs" />
     <Compile Include="SimpsonsRule.cs" />
     <Compile Include="TrapeziumRule.cs" />
   </ItemGroup>

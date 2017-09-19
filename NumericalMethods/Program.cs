@@ -6,29 +6,20 @@ namespace NumericalMethods
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"{ SimpsonsRule.Calculate(1, 2, 4, G) }");
+            for (int i = 1; i < 11; i++)
+                Console.WriteLine($"i: { i } FP { SecantMethod.Calculate(i, 0, 1, F) } CoS { ChangeOfSign.Calculate(i, 0, 1, F) } NR { NewtonRaphson.Calculate(i, 1.5, 0.00001, F) } RM { RearrangementMethod.Calculate(i, 0.1, F) }");
 
             Console.ReadKey();
         }
 
-        static double G(double x)
-        {
-            return x * x * x;
-        }
-
-        static double R1(double x)
-        {
-            return ((x * x * x * x * x) + 3) / 5;
-        }
-
-        static double R2(double x)
-        {
-            return Math.Pow((5 * x) - 3, 1/5);
-        }
-
         static double F(double x)
         {
-            return (x * x * x * x * x) - (5 * x) + 3;
+            return (x * x * x * x * x) - (5 * x) + 1;
+        }
+
+        static double Radians(double degrees)
+        {
+            return degrees / 180 * Math.PI;
         }
     }
 }
