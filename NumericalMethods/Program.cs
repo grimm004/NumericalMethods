@@ -6,20 +6,21 @@ namespace NumericalMethods
     {
         static void Main(string[] args)
         {
-            for (int i = 1; i < 11; i++)
-                Console.WriteLine($"i: { i } FP { SecantMethod.Calculate(i, 0, 1, F) } CoS { ChangeOfSign.Calculate(i, 0, 1, F) } NR { NewtonRaphson.Calculate(i, 1.5, 0.00001, F) } RM { RearrangementMethod.Calculate(i, 0.1, F) }");
+            int n = 20;
+            Console.WriteLine($"iterations: { n } { RearrangementMethod.Calculate(n, -1.5, G) }");
 
             Console.ReadKey();
         }
 
         static double F(double x)
         {
-            return (x * x * x * x * x) - (5 * x) + 1;
+            //return (x * x * x) - (4 * x * x) + (2 * x) + 2;
+            return (.5f * x * x * x) - (x * x) - (2.5f * x) + Math.E;
         }
 
-        static double Radians(double degrees)
+        static double G(double x)
         {
-            return degrees / 180 * Math.PI;
+            return (2f * ((.5f * x * x * x) - (x * x) + Math.E)) / 5f;
         }
     }
 }
