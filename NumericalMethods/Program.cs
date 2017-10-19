@@ -6,20 +6,14 @@ namespace NumericalMethods
     {
         static void Main(string[] args)
         {
-            for (int i = 1; i < 11; i++)
-                Console.WriteLine($"i: { i } FP { SecantMethod.Calculate(i, 0, 1, F) } CoS { ChangeOfSign.Calculate(i, 0, 1, F) } NR { NewtonRaphson.Calculate(i, 1.5, 0.00001, F) } RM { RearrangementMethod.Calculate(i, 0.1, F) }");
-
+            // Output the estimate for a decimal search with 10 iterations
+            Console.WriteLine($"n: { 5 }\tEstimate: { DecimalSearch.Calculate(5, -4, -3, F).ToString("0.0000000000") }");
             Console.ReadKey();
         }
 
         static double F(double x)
         {
-            return (x * x * x * x * x) - (5 * x) + 1;
-        }
-
-        static double Radians(double degrees)
-        {
-            return degrees / 180 * Math.PI;
+            return (x - Math.E) * ((x + Math.PI) * (x + Math.PI));
         }
     }
 }

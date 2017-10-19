@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CentralDifference.cs" />
-    <Compile Include="ChangeOfSign.cs" />
+    <Compile Include="DecimalSearch.cs" />
     <Compile Include="FalsePosition.cs" />
     <Compile Include="ForwardDifference.cs" />
     <Compile Include="Iteration.cs" />
