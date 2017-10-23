@@ -35,12 +35,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime">
-      <HintPath>..\..\NCalc\Evaluant.Calculator\bin\Debug\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="NCalc">
-      <HintPath>..\..\NCalc\Evaluant.Calculator\bin\Debug\NCalc.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
