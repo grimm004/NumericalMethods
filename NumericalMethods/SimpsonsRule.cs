@@ -30,7 +30,9 @@ namespace NumericalMethods
         public static double ExtrapolationToIninity(long n, double start, double end, Func<double, double> f)
         {
             double sn = Calculate(n, start, end, f);
+            Console.WriteLine($"S{ n } = { sn }");
             double s2n = Calculate(2 * n, start, end, f);
+            Console.WriteLine($"S{ 2 * n } = { s2n }");
             return ((s2n - sn) / 15) + s2n;
         }
     }
