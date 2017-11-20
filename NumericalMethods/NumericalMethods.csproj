@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="CentralDifference.cs" />
     <Compile Include="DecimalSearch.cs" />
+    <Compile Include="Error.cs" />
+    <Compile Include="EulersStepMethod.cs" />
     <Compile Include="FalsePosition.cs" />
     <Compile Include="ForwardDifference.cs" />
     <Compile Include="Iteration.cs" />

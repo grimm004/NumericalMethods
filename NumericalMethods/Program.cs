@@ -28,17 +28,27 @@ namespace NumericalMethods
             //double fx1 = F(x1);
             //Console.WriteLine($"x = { x1 } => F(x) = { fx1 }");
 
-            Console.WriteLine($"iterations: { 10 } { DecimalSearch.Calculate(10, 0, 1, F) }");
-            Console.WriteLine($"iterations: { 100 } { RearrangementMethod.Calculate(100, 0, G) }");
-            Console.WriteLine($"iterations: { 20 } { NewtonRaphson.Calculate(20, 0, F, Fprime) }");
+            //Console.WriteLine($"iterations: { 10 } { DecimalSearch.Calculate(10, 0, 1, F) }");
+            //Console.WriteLine($"iterations: { 100 } { RearrangementMethod.Calculate(100, 0, G) }");
+            //Console.WriteLine($"iterations: { 20 } { NewtonRaphson.Calculate(20, 0, F, Fprime) }");
+
+            //Console.WriteLine($"{ 0x2000000 } { SimpsonsRule.Calculate(0x2000000, 1, (decimal)Math.E, F).ToString("0.00000000000000000000") }");
+
+            Console.WriteLine(EulersStepMethod.Calculate(0.1m, 1m, 0m, 2m, DyDx));
 
             Console.ReadKey();
         }
 
-        static double F(double x)
+        static decimal DyDx(decimal x, decimal y)
+        {
+            return ((decimal)Math.Cos((double)x) - (3 * x * (y + (0.1m * y * y)))) / (x * x);
+        }
+
+        static decimal F(decimal x)
         {
             // negitive x cubed minus four x squared minus two x plus two
-            return -(x * x * x) - (4 * x * x) - (2 * x) + 2;
+            //return -(x * x * x) - (4 * x * x) - (2 * x) + 2;
+            return (1 / x);
         }
 
         static double Fprime(double x)
