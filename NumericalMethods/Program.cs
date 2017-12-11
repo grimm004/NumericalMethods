@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 //static double F(double x)
 //{
 //    // half x cubed minus x squared minus five halfs x plus e
@@ -34,14 +33,14 @@ namespace NumericalMethods
 
             //Console.WriteLine($"{ 0x2000000 } { SimpsonsRule.Calculate(0x2000000, 1, (decimal)Math.E, F).ToString("0.00000000000000000000") }");
 
-            Console.WriteLine(EulersStepMethod.Calculate(0.1m, 1m, 0m, 2m, DyDx));
+            Console.WriteLine(EulersStepMethod.Calculate(.1m, 2m, 2m, 2.6m, DyDx));
 
             Console.ReadKey();
         }
 
         static decimal DyDx(decimal x, decimal y)
         {
-            return ((decimal)Math.Cos((double)x) - (3 * x * (y + (0.1m * y * y)))) / (x * x);
+            return ((decimal)Math.Pow((double)(x * y), .5));
         }
 
         static decimal F(decimal x)

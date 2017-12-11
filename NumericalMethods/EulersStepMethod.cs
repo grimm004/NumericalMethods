@@ -12,15 +12,10 @@ namespace NumericalMethods
             {
                 xN = x0 + (n * h);
                 yNPrime = de(xN, yN);
-                yN = NextY(yN, yNPrime, h);
+                yN = yN + (yNPrime * h);
             }
 
             return yN;
-        }
-
-        protected static decimal NextY(decimal y, decimal yPrime, decimal h)
-        {
-            return y + (yPrime * h);
         }
     }
 }
