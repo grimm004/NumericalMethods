@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 //static double F(double x)
 //{
 //    // half x cubed minus x squared minus five halfs x plus e
@@ -34,10 +33,14 @@ namespace NumericalMethods
             //Console.WriteLine($"iterations: { 50 } { RearrangementMethod.Calculate(50, 0, G) }");
             //Console.WriteLine($"iterations: { 20 } { NewtonRaphson.Calculate(20, 0, F, Fprime) }");
 
+            //Console.WriteLine($"{ 0x2000000 } { SimpsonsRule.Calculate(0x2000000, 1, (decimal)Math.E, F).ToString("0.00000000000000000000") }");
+
+            Console.WriteLine(EulersStepMethod.Calculate(.1m, 2m, 2m, 2.6m, DyDx));
+
             Console.ReadKey();
         }
 
-        static double F(double x)
+        static decimal DyDx(decimal x, decimal y)
         {
             return (2 * x * x * x) - (3.15 * x * x) + x + 0.195;
         }
@@ -81,3 +84,42 @@ namespace NumericalMethods
         //}
     }
 }
+//using System;
+
+////return (x * x * x) - (4 * x * x) + (2 * x) + 2;
+//namespace NumericalMethods
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            int n = 50;
+//            Console.WriteLine($"iterations: { n } { RearrangementMethod.Calculate(n, 2, G) }");
+//            Console.ReadKey();
+//        }
+
+//        static double F(double x)
+//        {
+//            // half x cubed minus x squared minus two fifths x plus e
+//            return (.5f * x * x * x) - (x * x) - (2.5f * x) + Math.E;
+//        }
+
+//        //static double G(double x)
+//        //{
+//        //    // Rearranged function
+//        //    return Math.Pow((.5f * x * x * x) - (2.5f * x) + Math.E, .5);
+//        //}
+
+//        static double G(double x)
+//        {
+//            // Rearranged function
+//            return Math.Pow(2 * ((x * x) + (2.5f * x) - Math.E), 1f / 3d);
+//        }
+
+//        //static double G(double x)
+//        //{
+//        //    // Rearranged function
+//        //    return (2f * ((.5f * x * x * x) - (x * x) + Math.E)) / 5f;
+//        //}
+//    }
+//}
