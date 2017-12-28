@@ -27,29 +27,36 @@ namespace NumericalMethods
             //double x1 = x + 0.000005;
             //double fx1 = F(x1);
             //Console.WriteLine($"x = { x1 } => F(x) = { fx1 }");
+            //Console.WriteLine(CentralDifference.Calculate(RearrangementMethod.Calculate(50, 0, G), 0.0000000001, G));
+            Console.WriteLine($"n: { 10 }\testimate: { DecimalSearch.Calculate(10, 0, 1, F) }");
 
-            Console.WriteLine($"iterations: { 10 } { DecimalSearch.Calculate(10, 0, 1, F) }");
-            Console.WriteLine($"iterations: { 100 } { RearrangementMethod.Calculate(100, 0, G) }");
-            Console.WriteLine($"iterations: { 20 } { NewtonRaphson.Calculate(20, 0, F, Fprime) }");
+            //Console.WriteLine($"iterations: { 10 } { DecimalSearch.Calculate(10, 0, 1, F) }");
+            //Console.WriteLine($"iterations: { 50 } { RearrangementMethod.Calculate(50, 0, G) }");
+            //Console.WriteLine($"iterations: { 20 } { NewtonRaphson.Calculate(20, 0, F, Fprime) }");
 
             Console.ReadKey();
         }
 
         static double F(double x)
         {
-            // negitive x cubed minus four x squared minus two x plus two
-            return -(x * x * x) - (4 * x * x) - (2 * x) + 2;
+            return (2 * x * x * x) - (3.15 * x * x) + x + 0.195;
         }
 
-        static double Fprime(double x)
-        {
-            return -(3 * x * x) - (8 * x) - 2;
-        }
+        //static double F(double x)
+        //{
+        //    // negitive x cubed minus four x squared minus two x plus two
+        //    return -(x * x * x) - (4 * x * x) - (2 * x) + 2;
+        //}
 
-        static double G(double x)
-        {
-            return Math.Pow((-(x * x * x) - (2 * x) + 2) / 4, .5);
-        }
+        //static double Fprime(double x)
+        //{
+        //    return -(3 * x * x) - (8 * x) - 2;
+        //}
+
+        //static double G(double x)
+        //{
+        //    return Math.Pow((-(x * x * x) - (2 * x) + 2) / 4, .5);
+        //}
 
         //static double F(double x)
         //{
