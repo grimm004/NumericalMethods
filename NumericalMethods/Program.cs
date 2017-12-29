@@ -1,125 +1,79 @@
 ﻿using System;
 
-//static double F(double x)
-//{
-//    // half x cubed minus x squared minus five halfs x plus e
-//    return (.5f * x * x * x) - (x * x) - (2.5f * x) + Math.E;
-//    //return (x * x * x) - (4 * x * x) + (2 * x) + 2;
-//}
-
-//static double G(double x)
-//{
-//    return (2f * ((.5f * x * x * x) - (x * x) + Math.E)) / 5f;
-//}
-
 namespace NumericalMethods
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //double x = 0.48119;
-            //Console.WriteLine($"x = { x }");
-            //double x0 = x - 0.000005;
-            //double fx0 = F(x0);
-            //Console.WriteLine($"x = { x0 } => F(x) = { fx0 }");
-            //double x1 = x + 0.000005;
-            //double fx1 = F(x1);
-            //Console.WriteLine($"x = { x1 } => F(x) = { fx1 }");
-            //Console.WriteLine(CentralDifference.Calculate(RearrangementMethod.Calculate(50, 0, G), 0.0000000001, G));
-            Console.WriteLine($"n: { 10 }\testimate: { DecimalSearch.Calculate(10, 0, 1, F) }");
-
-            //Console.WriteLine($"iterations: { 10 } { DecimalSearch.Calculate(10, 0, 1, F) }");
-            //Console.WriteLine($"iterations: { 50 } { RearrangementMethod.Calculate(50, 0, G) }");
-            //Console.WriteLine($"iterations: { 20 } { NewtonRaphson.Calculate(20, 0, F, Fprime) }");
-
-            //Console.WriteLine($"{ 0x2000000 } { SimpsonsRule.Calculate(0x2000000, 1, (decimal)Math.E, F).ToString("0.00000000000000000000") }");
-
-            Console.WriteLine(EulersStepMethod.Calculate(.1m, 2m, 2m, 2.6m, DyDx));
-
+            // Run the function to calculate and output integral estimates
+            NumericalIntegration(20, 0, (decimal)(Math.PI / 2d));
+            // Halt the program
             Console.ReadKey();
         }
 
-        static decimal DyDx(decimal x, decimal y)
+        static decimal F(decimal x)
         {
-            return (2 * x * x * x) - (3.15 * x * x) + x + 0.195;
+            // Calculate and return the value for the function at x
+            // ln(sin(cos(e^(-x^2))))
+            // natural log of the sine of the cosine of e to the negative x squared
+            return (decimal)Math.Log(Math.Sin(Math.Cos(Math.Pow(Math.E, (double)-(x * x)))));
         }
 
-        //static double F(double x)
-        //{
-        //    // negitive x cubed minus four x squared minus two x plus two
-        //    return -(x * x * x) - (4 * x * x) - (2 * x) + 2;
-        //}
+        static void NumericalIntegration(int maximumPowerIndex, decimal start, decimal end)
+        {
+            // Define and initialize the arrays of all the data to be collected
+            decimal[] m, t, s, r, eA, eR;
+            m = new decimal[maximumPowerIndex];
+            t = new decimal[maximumPowerIndex];
+            s = new decimal[maximumPowerIndex];
+            r = new decimal[maximumPowerIndex];
+            eA = new decimal[maximumPowerIndex];
+            eR = new decimal[maximumPowerIndex];
 
-        //static double Fprime(double x)
-        //{
-        //    return -(3 * x * x) - (8 * x) - 2;
-        //}
+            // Define and initialize the current strip count holder
+            long n = 1;
+            // Define and initialize the current index (for the array storage)
+            int i = 0;
+            // Calculate initial values for the trapezium, midpoint and simpsons rule
+            // This is not included in the below loop so that the second method of
+            // calculating the trapezium rule can be used for remaining estimates.
+            t[i] = TrapeziumRule.Calculate(n, start, end, F);
+            m[i] = MidpointRule.Calculate(n, start, end, F);
+            s[i] = SimpsonsRule.Calculate(t[i], m[i]);
 
-        //static double G(double x)
-        //{
-        //    return Math.Pow((-(x * x * x) - (2 * x) + 2) / 4, .5);
-        //}
+            // Loop through each power of two up until the desired power
+            for (i = 1; i < maximumPowerIndex; i++)
+            {
+                // Multiply n by two
+                n *= 2;
+                // Calculated the next estimates using the numerical methods
+                t[i] = TrapeziumRule.Calculate(m[i - 1], t[i - 1]);
+                m[i] = MidpointRule.Calculate(n, start, end, F);
+                s[i] = SimpsonsRule.Calculate(t[i], m[i]);
+                // If the current index is greater than 1, calculate the ratio of differences
+                if (i > 1) r[i] = SimpsonsRule.GetRatio(s[i - 2], s[i - 1], s[i]);
+            }
 
-        //static double F(double x)
-        //{
-        //    // negitive three x cubed plus two x squard plus half x minus one fifth
-        //    return -(3 * x * x * x) + (2 * x * x) + (.5 * x) - .2;
-        //}
+            // 
+            decimal acceptedValue = s[s.Length - 1];
+            Console.WriteLine("Taking accepted value to be I = {0:0.00000000000000000000}", acceptedValue);
 
-        //static double Fprime(double x)
-        //{
-        //    return -(9 * x * x) + (4 * x) + .5;
-        //}
+            for (i = 0; i < maximumPowerIndex; i++)
+            {
+                eA[i] = Math.Abs(s[i] - acceptedValue);
+                eR[i] = eA[i] / acceptedValue;
+            }
 
-        //static double F(double x)
-        //{
-        //    // one fifth x to the four plus x cubed minus x squard minus five x plus three
-        //    return ((1 / 5) * x * x * x * x) + (x * x * x) - (x * x) - (5 * x) + 3;
-        //}
-
-        //static double Fp(double x)
-        //{
-        //    return ((4 / 5) * x * x * x) + (3 * x * x) - (2 * x) - 5;
-        //}
+            n = 1;
+            for (i = 0; i < maximumPowerIndex; i++)
+            {
+                n *= 2;
+                Console.Write("i: {0}, n: {1}, tn: {2:0.00000000000000000000}, mn: {3:0.00000000000000000000}, sn: {4:0.00000000000000000000} ", i, n, t[i], m[i], s[i]);
+                Console.Write("eA: {0:0.00000000000000000000}, eR: {1:0.00000000000000000000}% ", eA[i], 100 * eR[i]);
+                if (i > 1) Console.WriteLine("RoD: {0:0.00000000000000000000}", r[i]);
+                else Console.WriteLine();
+            }
+        }
     }
 }
-//using System;
-
-////return (x * x * x) - (4 * x * x) + (2 * x) + 2;
-//namespace NumericalMethods
-//{
-//    class Program
-//    {
-//        static void Main(string[] args)
-//        {
-//            int n = 50;
-//            Console.WriteLine($"iterations: { n } { RearrangementMethod.Calculate(n, 2, G) }");
-//            Console.ReadKey();
-//        }
-
-//        static double F(double x)
-//        {
-//            // half x cubed minus x squared minus two fifths x plus e
-//            return (.5f * x * x * x) - (x * x) - (2.5f * x) + Math.E;
-//        }
-
-//        //static double G(double x)
-//        //{
-//        //    // Rearranged function
-//        //    return Math.Pow((.5f * x * x * x) - (2.5f * x) + Math.E, .5);
-//        //}
-
-//        static double G(double x)
-//        {
-//            // Rearranged function
-//            return Math.Pow(2 * ((x * x) + (2.5f * x) - Math.E), 1f / 3d);
-//        }
-
-//        //static double G(double x)
-//        //{
-//        //    // Rearranged function
-//        //    return (2f * ((.5f * x * x * x) - (x * x) + Math.E)) / 5f;
-//        //}
-//    }
-//}
