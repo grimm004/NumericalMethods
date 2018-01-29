@@ -4,23 +4,23 @@ namespace NumericalMethods
 {
     class NewtonRaphson
     {
-        public static double Calculate(int n, double x0, Func<double, double> f, Func<double, double> fPrime)
+        public static decimal Calculate(int n, decimal x0, Func<decimal, decimal> f, Func<decimal, decimal> fPrime)
         {
             // If the remaining iterations is equal to zero, return the inputted value of x0
             if (n == 0) return x0;
             // Calculate x1 by recursively calling this function again
-            double x1 = Calculate(n - 1, x0, f, fPrime);
+            decimal x1 = Calculate(n - 1, x0, f, fPrime);
             Console.WriteLine($"x<{ n - 1 }>:\t{ x1 }");
             // Return the result of the Newton-Raphson equation on this new value of x
             return (x1 - (f(x1) / fPrime(x1)));
         }
 
-        public static double Calculate(int n, double x0, double h, Func<double, double> f)
+        public static decimal Calculate(int n, decimal x0, decimal h, Func<decimal, decimal> f)
         {
             // If the remaining iterations is equal to zero, return the inputted value of x0
             if (n == 0) return x0;
             // Calculate x1 by recursively calling this function again
-            double x1 = Calculate(n - 1, x0, h, f);
+            decimal x1 = Calculate(n - 1, x0, h, f);
             Console.WriteLine($"x<{ n - 1 }>:\t{ x1 }");
             // Return the result of the Newton-Raphson equation on this new value of x using the CentralDifference method to estimate the gradient
             return (x1 - (f(x1) / CentralDifference.Calculate(x1, h, f)));
