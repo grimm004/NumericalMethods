@@ -4,6 +4,8 @@ namespace NumericalMethods
 {
     class Program
     {
+        private const string ACCURACY = "0.00000000000000000000";
+
         static void Main(string[] args)
         {
             // Run the function to calculate and output integral estimates
@@ -59,10 +61,13 @@ namespace NumericalMethods
             for (i = 0; i < maximumPowerIndex; i++)
             {
                 n *= 2;
-                Console.Write("i: {0}\tn: {1}\ttn: {2:0.00000000000000000000} mn: {3:0.00000000000000000000} sn: {4:0.00000000000000000000} ", i, n, t[i], m[i], s[i]);
-                Console.Write("Sum: {0:0.00000000000000000000} ", sTi[i]);
-                if (i > 1) Console.WriteLine("RoD: {0:0.00000000000000000000}", r[i]);
-                else Console.WriteLine();
+                Console.Write($"i: { i }\tn: { n }\t");
+                Console.Write($"Tn: { t[i].ToString(ACCURACY) } ");
+                Console.Write($"Mn: { m[i].ToString(ACCURACY) } ");
+                Console.Write($"Sn: { s[i].ToString(ACCURACY) } ");
+                Console.Write($"Sum: { sTi[i].ToString(ACCURACY) } ");
+                if (i > 1) Console.Write($"RoD: { r[i].ToString(ACCURACY) }");
+                Console.WriteLine();
             }
         }
     }
